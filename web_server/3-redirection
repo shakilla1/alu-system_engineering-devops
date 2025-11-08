@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Script that configures a new Ubuntu machine with the following requirements:
+
+sudo apt-get update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+echo "Holberton School :)" | sudo tee /var/www/html/index.html > /dev/null
+
+sudo sed -i '/server_name _;/a \\n    location /redirect_me {\n        return 301 https://www.github.com/shakilla1;\n    }' /etc/nginx/sites-enabled/default
+
+sudo service nginx restart
